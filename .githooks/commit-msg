@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+
+const regexp = /(feature|bugfix|other)-\w{5,100}/g;
+
+const errorMsg = `This commit was not successful because you didn't follow the commit message syntax for this project.
+a valid commit message would be:
+
+        "task type(e.g feature, bugfix)-a descriptive header"
+
+The header is limited to 100 characters.
+Such naming as "feature-" is not sufficient.`;
+
+function checkCommitMessage() {
+    // Get commit message
+    const message = fs.readFileSync(process.argv[2], 'utf8').trim();
+    let result = 0;
+
+    try {
+        result = validateMsg(message);
+    } catch (e) {
+        console.error(e.message);
+    }
+
+    if (result === 1) {
+        console.error(errorMsg);
+    }
+
+    process.exit(result);
+}
+
+function validateMsg(commitMsg) {
+    msgArr = commitMsg.split('\n');
+
+    if (msgArr[0].match(regexp) === null) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+checkCommitMessage();
