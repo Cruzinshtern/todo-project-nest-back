@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -10,8 +11,9 @@ import { MongooseModule } from '@nestjs/mongoose';
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@basic-db.kbspaui.mongodb.net/`,
+      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@basic-db.kbspaui.mongodb.net/${process.env.DB_NAME}`,
     ),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
