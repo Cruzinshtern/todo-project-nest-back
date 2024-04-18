@@ -5,6 +5,9 @@ import { Model, QueryWithHelpers } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const bcryptjs = require('bcryptjs');
+
 @Injectable()
 export class UsersService {
 	constructor(@InjectModel(User.name) private _userModel: Model<UserDocument>) {}
@@ -18,7 +21,8 @@ export class UsersService {
 			}
 
 			//Continue with creation of a user
-			const newUser = await new this._userModel(createUserDto);
+			const hashedPassword = await bcryptjs.hash(createUserDto.password, Number(process.env.PASSWORD_SALT));
+			const newUser = await new this._userModel({ ...createUserDto, password: hashedPassword });
 			return await newUser.save();
 		} catch (err) {
 			return err;
