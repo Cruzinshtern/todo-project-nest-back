@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ObjectId } from 'mongodb';
-import { Model, QueryWithHelpers } from 'mongoose';
+import { Model } from 'mongoose';
 import { MESSAGE } from 'src/shared/mesages.enum';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
@@ -31,10 +31,14 @@ export class UsersService {
 	}
 
 	async getAll(): Promise<User[]> {
-		return await this._userModel.find();
+		try {
+			return await this._userModel.find();
+		} catch (err) {
+			return err;
+		}
 	}
 
-	async getUserById(id: string): Promise<QueryWithHelpers<UserDocument, any>> {
+	async getUserById(id: string): Promise<User> {
 		try {
 			const user = await this._userModel.findOne({
 				_id: new ObjectId(id),
@@ -48,7 +52,7 @@ export class UsersService {
 		}
 	}
 
-	async getUserByEmail(email: string): Promise<QueryWithHelpers<UserDocument, any>> {
+	async getUserByEmail(email: string): Promise<User> {
 		try {
 			return await this._userModel.findOne({ email });
 		} catch (err) {

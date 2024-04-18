@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { MESSAGE } from 'src/shared/mesages.enum';
 import { UsersService } from '../users/users.service';
+import { SigninResponseDto } from './dtos/signin-response.dto';
 import { SigninUserDto } from './dtos/signin-user.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -14,7 +15,7 @@ export class AuthService {
 		private _jwtService: JwtService,
 	) {}
 
-	async login(userDto: SigninUserDto): Promise<{ token: string }> {
+	async login(userDto: SigninUserDto): Promise<SigninResponseDto> {
 		const user = await this.validateUser(userDto);
 		return await this.generateToken(user);
 	}
@@ -28,7 +29,7 @@ export class AuthService {
 		throw new UnauthorizedException({ message: MESSAGE.WRONG_EMAIL_OR_PASSWORD });
 	}
 
-	private async generateToken(user: any): Promise<{ token: string }> {
+	private async generateToken(user: any): Promise<SigninResponseDto> {
 		const payload = {
 			id: user.id,
 			email: user.email,
