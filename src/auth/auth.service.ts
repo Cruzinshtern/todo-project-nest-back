@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { MESSAGE } from 'src/shared/mesages.enum';
 import { UsersService } from '../users/users.service';
 import { SigninUserDto } from './dtos/signin-user.dto';
 
@@ -24,7 +25,7 @@ export class AuthService {
 		if (user && passwordEquals) {
 			return user;
 		}
-		throw new UnauthorizedException({ message: 'Wrong email or password' });
+		throw new UnauthorizedException({ message: MESSAGE.WRONG_EMAIL_OR_PASSWORD });
 	}
 
 	private async generateToken(user: any): Promise<{ token: string }> {

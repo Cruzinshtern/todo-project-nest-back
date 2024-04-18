@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ObjectId } from 'mongodb';
 import { Model, QueryWithHelpers } from 'mongoose';
+import { MESSAGE } from 'src/shared/mesages.enum';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
@@ -17,7 +18,7 @@ export class UsersService {
 			//Check is user with such email already exists
 			const isUserExist = await this.getUserByEmail(createUserDto.email);
 			if (isUserExist) {
-				throw new HttpException('User with such email already exist', HttpStatus.CONFLICT);
+				throw new HttpException(MESSAGE.USER_EXISTS, HttpStatus.CONFLICT);
 			}
 
 			//Continue with creation of a user
@@ -39,11 +40,11 @@ export class UsersService {
 				_id: new ObjectId(id),
 			});
 			if (!user) {
-				throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+				throw new HttpException(MESSAGE.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
 			}
 			return user;
 		} catch (err) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+			throw new HttpException(MESSAGE.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -51,7 +52,7 @@ export class UsersService {
 		try {
 			return await this._userModel.findOne({ email });
 		} catch (err) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+			throw new HttpException(MESSAGE.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
 		}
 	}
 }

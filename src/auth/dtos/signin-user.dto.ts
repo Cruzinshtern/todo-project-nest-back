@@ -1,11 +1,12 @@
 import { IsEmail, IsString, Length } from 'class-validator';
+import { MESSAGE } from 'src/shared/mesages.enum';
 
 export class SigninUserDto {
-	@IsString({ message: 'Has to be a string' })
-	@IsEmail({}, { message: 'Email format is incorrect' })
+	@IsString({ message: MESSAGE.WRONG_STRING_FORMAT })
+	@IsEmail({}, { message: MESSAGE.WRONG_EMAIL_FORMAT })
 	readonly email: string;
 
-	@IsString({ message: 'Has to be a string' })
-	@Length(4, 16, { message: 'Password needs to be more then 4 and less then 16 symbols long' })
+	@IsString({ message: MESSAGE.WRONG_STRING_FORMAT })
+	@Length(4, 16, { message: MESSAGE.WRONG_PASSWORD_FORMAT })
 	readonly password: string;
 }
