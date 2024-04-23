@@ -6,4 +6,5 @@ export enum MESSAGE {
 	WRONG_STRING_FORMAT = 'Has to be a string',
 	WRONG_EMAIL_FORMAT = 'Email format is incorrect',
 	WRONG_PASSWORD_FORMAT = 'Password needs to be more then 4 and less then 16 symbols long',
+	NO_TITLE = 'Has to have a title',
 }

@@ -9,7 +9,7 @@ export enum SWAGGER {
 	SIGNIN_SUMMARY = 'Signin by a user',
 	SIGNIN_RESPONSE_EXAMPLE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 	SIGNIN_RESPONSE_DESCRIPTION = 'Token issued to a user',
-	// USER module
+	// USERS module
 	USER_FIRST_NAME_EXAMPLE = 'First name',
 	USER_FIRST_NAME_DESCRIPTION = 'First name of a user',
 	USER_LAST_NAME_EXAMPLE = 'Last name',
@@ -23,4 +23,22 @@ export enum SWAGGER {
 	USER_GET_BY_ID = 'Get user by id',
 	USER_GET_ALL = 'Get all users',
 	USER_NOT_FOUND = 'User not found',
+	// TASKS module
+	TASK_TITLE_EXAMPLE = 'My title',
+	TASK_TITLE_DESCRIPTION = 'Title of a task',
+	TASK_DESCRIPTION_EXAMPLE = 'My sample of task description',
+	TASK_DESCRIPTION_DESCRIPTION = "Title's description",
+	TASK_STATUS_EXAMPLE = '1',
+	TASK_STATUS_DESCRIPTION = 'Status of a task as a code',
+	TASK_CREATED_AT_EXAMPLE = '2023-05-20',
+	TASK_CREATED_AT_DESCRIPTION = 'Date when a task is created',
+	TASK_START_AT_EXAMPLE = '2023-05-21',
+	TASK_START_AT_DESCRIPTION = 'Date when a task is due',
+	TASK_CREATED_BY_EXAMPLE = 'User',
+	TASK_CREATED_BY_DESCRIPTION = 'Person who created the task',
+	TASK_CREATE = 'Create task',
+	TASK_GET_ALL = 'Get all tasks',
+	TASK_GET_ALL_BY_DATE = 'Get all tasks by date',
+	TASK_GET_BY_ID = 'Get task by id',
+	TASK_UPDATE = 'Update task',
 }
