@@ -14,7 +14,7 @@ export class UsersController {
 	@ApiOperation({ summary: SWAGGER.USER_CREATE })
 	@ApiResponse({ status: 200, type: User })
 	@Post('create')
-	async create(@Body() body: CreateUserDto): Promise<User> {
+	async create(@Body() body: CreateUserDto): Promise<any> {
 		return await this._usersService.create(body);
 	}
 

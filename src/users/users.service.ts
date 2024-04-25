@@ -13,21 +13,17 @@ const bcryptjs = require('bcryptjs');
 export class UsersService {
 	constructor(@InjectModel(User.name) private _userModel: Model<UserDocument>) {}
 
-	async create(createUserDto: CreateUserDto): Promise<User> {
-		try {
-			//Check is user with such email already exists
-			const isUserExist = await this.getUserByEmail(createUserDto.email);
-			if (isUserExist) {
-				throw new HttpException(MESSAGE.USER_EXISTS, HttpStatus.CONFLICT);
-			}
-
-			//Continue with creation of a user
-			const hashedPassword = await bcryptjs.hash(createUserDto.password, Number(process.env.PASSWORD_SALT));
-			const newUser = await new this._userModel({ ...createUserDto, password: hashedPassword });
-			return await newUser.save();
-		} catch (err) {
-			return err;
+	async create(createUserDto: CreateUserDto): Promise<User | HttpException> {
+		//Check is user with such email already exists
+		const isUserExist = await this.getUserByEmail(createUserDto.email);
+		if (isUserExist) {
+			throw new HttpException(MESSAGE.USER_EXISTS, HttpStatus.CONFLICT);
 		}
+
+		//Continue with creation of a user
+		const hashedPassword = await bcryptjs.hash(createUserDto.password, Number(process.env.PASSWORD_SALT));
+		const newUser = await new this._userModel({ ...createUserDto, password: hashedPassword });
+		return await newUser.save();
 	}
 
 	async getAll(): Promise<User[]> {
