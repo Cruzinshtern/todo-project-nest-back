@@ -21,6 +21,10 @@ export class Task {
 	@Prop({ type: mongoose.Schema.Types.Number, enum: TaskStatus, default: TaskStatus.TODO })
 	status: TaskStatus;
 
+	@ApiProperty({ example: SWAGGER.TASK_IS_FAVORITE_EXAMPLE, description: SWAGGER.TASK_IS_FAVORITE_DESCRIPTION })
+	@Prop({ type: mongoose.Schema.Types.Boolean, default: false })
+	isFavorite: boolean;
+
 	@ApiProperty({ example: SWAGGER.TASK_CREATED_AT_EXAMPLE, description: SWAGGER.TASK_CREATED_AT_DESCRIPTION })
 	@Prop({ type: mongoose.Schema.Types.String })
 	created_at: string;

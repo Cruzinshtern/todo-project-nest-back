@@ -30,6 +30,8 @@ export enum SWAGGER {
 	TASK_DESCRIPTION_DESCRIPTION = "Title's description",
 	TASK_STATUS_EXAMPLE = '1',
 	TASK_STATUS_DESCRIPTION = 'Status of a task as a code',
+	TASK_IS_FAVORITE_EXAMPLE = 'false',
+	TASK_IS_FAVORITE_DESCRIPTION = 'Boolean value informing whether a task is in favorite list',
 	TASK_CREATED_AT_EXAMPLE = '2023-05-20',
 	TASK_CREATED_AT_DESCRIPTION = 'Date when a task is created',
 	TASK_START_AT_EXAMPLE = '2023-05-21',
