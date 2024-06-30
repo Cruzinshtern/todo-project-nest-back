@@ -12,7 +12,8 @@ import { UsersModule } from './users/users.module';
 		ConfigModule.forRoot({
 			envFilePath: `.env.${process.env.NODE_ENV}`,
 		}),
-		MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@basic-db.kbspaui.mongodb.net/${process.env.DB_NAME}`),
+		// MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@basic-db.kbspaui.mongodb.net/${process.env.DB_NAME}`),
+		MongooseModule.forRoot(`mongodb+srv://matvienkobohdandev:mypassword@basic-db.kbspaui.mongodb.net/basic-db`),
 		UsersModule,
 		AuthModule,
 		TasksModule,
