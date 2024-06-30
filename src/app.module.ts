@@ -13,7 +13,7 @@ import { UsersModule } from './users/users.module';
 			envFilePath: `.env.${process.env.NODE_ENV}`,
 		}),
 		// MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@basic-db.kbspaui.mongodb.net/${process.env.DB_NAME}`),
-		MongooseModule.forRoot('mongodb://mongo:fQsopiSvXttwjfpWDzQdIpVEepxTYiCa@roundhouse.proxy.rlwy.net:53248'),
+		MongooseModule.forRoot(`mongodb://mongo:${process.env.DB_RAILWAY_HASH}@roundhouse.proxy.rlwy.net:53248`),
 		UsersModule,
 		AuthModule,
 		TasksModule,
