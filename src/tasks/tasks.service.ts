@@ -73,6 +73,15 @@ export class TasksService {
 		}
 	}
 
+	async delete(id: string): Promise<any> {
+		try {
+			await this._taskModel.deleteOne({ _id: id });
+			return 'Todo has been deleted';
+		} catch (err) {
+			return err;
+		}
+	}
+
 	private _getAllTodosByUser(id: string): Query<any, any> {
 		try {
 			return this._taskModel.find().where('created_by', id);

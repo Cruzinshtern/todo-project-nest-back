@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SWAGGER } from 'src/shared/swagger.enum';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -56,5 +56,14 @@ export class TasksController {
 	@UseGuards(JwtAuthGuard)
 	async update(@Param('id') id: string, @Body() body: UpdateTaskDto) {
 		return await this._tasksService.update(body);
+	}
+
+	@ApiBearerAuth()
+	@ApiOperation({ summary: SWAGGER.TASK_UPDATE })
+	@ApiResponse({ status: 200, type: Task })
+	@Delete(':id')
+	@UseGuards(JwtAuthGuard)
+	async delete(@Param('id') id: string) {
+		return await this._tasksService.delete(id);
 	}
 }
