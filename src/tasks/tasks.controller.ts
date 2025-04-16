@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SWAGGER } from 'src/shared/swagger.enum';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { QueryParams } from './dtos/query-params.dto';
+import { UpdateFavStatusDto } from './dtos/update-fav-status-dto';
 import { UpdateTaskDto } from './dtos/update-task-dto';
 import { Task } from './schemas/task.schema';
 import { TasksService } from './tasks.service';
@@ -41,6 +42,15 @@ export class TasksController {
 	}
 
 	@ApiBearerAuth()
+	@ApiOperation({ summary: SWAGGER.TASK_FAV_STATUS_UPDATE })
+	@ApiResponse({ status: 200, type: Task })
+	@Get('/favorites')
+	@UseGuards(JwtAuthGuard)
+	async getAllFavorites() {
+		return await this._tasksService.getAllFavorites();
+	}
+
+	@ApiBearerAuth()
 	@ApiResponse({ status: 200, type: Task })
 	@ApiOperation({ summary: SWAGGER.TASK_GET_BY_ID })
 	@Get(':id')
@@ -56,6 +66,15 @@ export class TasksController {
 	@UseGuards(JwtAuthGuard)
 	async update(@Param('id') id: string, @Body() body: UpdateTaskDto) {
 		return await this._tasksService.update(body);
+	}
+
+	@ApiBearerAuth()
+	@ApiOperation({ summary: SWAGGER.TASK_FAV_STATUS_UPDATE })
+	@ApiResponse({ status: 200, type: Task })
+	@Patch('/favorite/:id')
+	@UseGuards(JwtAuthGuard)
+	async updateFavorite(@Param('id') id: string, @Body() { isFavorite }: UpdateFavStatusDto) {
+		return await this._tasksService.updateFavStatus(id, isFavorite);
 	}
 
 	@ApiBearerAuth()

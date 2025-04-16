@@ -65,6 +65,22 @@ export class TasksService {
 		}
 	}
 
+	async updateFavStatus(id: string, isFavorite: boolean): Promise<Task> {
+		try {
+			return await this._taskModel.findByIdAndUpdate(id, { updatedAt: format(new Date(), 'yyyy-MM-dd'), isFavorite }, { new: true });
+		} catch (err) {
+			return err;
+		}
+	}
+
+	async getAllFavorites(): Promise<Task[]> {
+		try {
+			return await this._taskModel.find({ isFavorite: true });
+		} catch (err) {
+			return err;
+		}
+	}
+
 	async getOneById(id: string): Promise<Task> {
 		try {
 			return await this._taskModel.findOne({ _id: id });
