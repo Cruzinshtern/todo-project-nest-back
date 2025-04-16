@@ -43,4 +43,5 @@ export enum SWAGGER {
 	TASK_GET_ALL_BY_DATE = 'Get all tasks by date',
 	TASK_GET_BY_ID = 'Get task by id',
 	TASK_UPDATE = 'Update task',
+	TASK_DELETE = 'Delete task',
 }

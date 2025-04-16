@@ -60,7 +60,7 @@ export class TasksController {
 
 	@ApiBearerAuth()
 	@ApiOperation({ summary: SWAGGER.TASK_UPDATE })
-	@ApiResponse({ status: 200, type: Task })
+	@ApiResponse({ status: 200, type: String })
 	@Delete(':id')
 	@UseGuards(JwtAuthGuard)
 	async delete(@Param('id') id: string) {

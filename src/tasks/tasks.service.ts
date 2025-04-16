@@ -73,7 +73,7 @@ export class TasksService {
 		}
 	}
 
-	async delete(id: string): Promise<any> {
+	async delete(id: string): Promise<string> {
 		try {
 			await this._taskModel.deleteOne({ _id: id });
 			return 'Todo has been deleted';
