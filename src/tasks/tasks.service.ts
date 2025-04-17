@@ -38,7 +38,7 @@ export class TasksService {
 				.where(filterField && filterValue ? filterObj : {})
 				.sort(sortField && sortDirection ? sortObj : { _id: 1 })
 				.limit(limit)
-				.skip(limit * page);
+				.skip(limit * (page - 1)); // It's preferrably to send pages starting from '1' not '0' from the frontend
 			const allTasksCount = await this._taskModel.countDocuments({});
 			return {
 				data: tasks,
